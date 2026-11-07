@@ -25,7 +25,7 @@ npx serve .
 python -m http.server 8080
 ```
 
-Abrí `index.html` en el navegador (o `http://localhost:8080/`) e instalá la app desde el menú del navegador si querés. También podés entrar directamente a `app.html` o ver el showcase en `prototype.html`.
+Abrí `index.html` en el navegador (o `http://localhost:8080/`) e instalá la app desde el menú del navegador si querés. También podés entrar directamente a `app.html`.
 
 ## Estructura
 
@@ -37,10 +37,9 @@ pwa.js            # Router, sesión, instalación, SW
 sw.js             # Service worker (soporte offline)
 manifest.json     # Manifest de la PWA
 icons/            # Iconos de la app (any + maskable)
-app.js            # Interacciones del prototipo (guía, voz, filtros)
+app.js            # Interacciones de la app (guía, voz, filtros)
 styles.css        # Estilos de las pantallas
-prototype.html    # Prototipo estático (showcase de las 8 pantallas)
-landing.html      # Landing promocional del prototipo
+landing.html      # Landing promocional de la aplicación
 audio/            # Respuestas de voz del asistente (MP3)
 ```
 
