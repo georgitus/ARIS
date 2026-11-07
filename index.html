@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="refresh" content="0; url=app.html">
+  <meta name="theme-color" content="#0A192F">
+  <meta name="description" content="ARIS — Tu aliado en emergencias. Asistencia por voz, alertas y guías de primeros auxilios.">
+  <title>ARIS — Tu aliado en emergencias</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+
+  <script>
+    // Redirección inmediata preservando parámetros (?source=pwa, etc.) y hash (#/rcp, #/sismo, etc.)
+    (function () {
+      var search = window.location.search || "";
+      var hash = window.location.hash || "";
+      // Si no se pide explícitamente pausar la redirección (?select=1)
+      if (!/[?&]select=1/.test(search)) {
+        window.location.replace("app.html" + search + hash);
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy-950: #050C17;
+      --navy-900: #0A192F;
+      --navy-800: #102A46;
+      --cyan: #38BDF8;
+      --cyan-bright: #4CC7FA;
+      --text: #EAF2FC;
+      --muted: #93A9C4;
+      --line: rgba(148, 178, 214, 0.16);
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 20%, #102A46 0%, #0A192F 55%, #050C17 100%);
+      color: var(--text);
+      font-family: var(--font);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(16, 42, 70, 0.45);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 28px;
+      padding: 40px 32px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+      color: #FFFFFF;
+      margin-bottom: 20px;
+      box-shadow: 0 12px 28px -6px rgba(2, 132, 199, 0.5);
+    }
+
+    .brand-mark svg {
+      width: 40px;
+      height: 40px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      color: #FFFFFF;
+    }
+
+    p.lead {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(56, 189, 248, 0.2);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 0.9s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
+      margin: 0 auto 24px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn--primary {
+      background: var(--cyan);
+      color: #0A192F;
+      box-shadow: 0 10px 24px -8px rgba(56, 189, 248, 0.5);
+    }
+
+    .btn--primary:hover {
+      background: var(--cyan-bright);
+      transform: translateY(-1px);
+    }
+
+    .btn--secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .btn--secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(148, 178, 214, 0.3);
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+        <path d="M3 11.5h3.6l1.5-2.6 2.4 5.2 1.6-2.6H21"/>
+      </svg>
+    </div>
+
+    <h1>ARIS</h1>
+    <p class="lead">Tu aliado en emergencias y salud.<br>Iniciando aplicación...</p>
+
+    <div class="spinner" aria-label="Cargando"></div>
+
+    <div class="actions">
+      <a href="app.html" class="btn btn--primary" id="btn-app">
+        <span>Abrir Aplicación Móvil</span>
+        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="prototype.html" class="btn btn--secondary">
+        <span>Ver Prototipo UI (8 pantallas)</span>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/><path d="M3 12h18"/></svg>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
+

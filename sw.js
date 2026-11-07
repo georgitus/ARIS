@@ -11,6 +11,7 @@ var AUDIO_CACHE = "aris-audio-" + VERSION + ".1";
 /* App shell: todo lo necesario para arrancar sin red. */
 var CORE_ASSETS = [
   "./",
+  "index.html",
   "app.html",
   "manifest.json",
   "styles.css",
@@ -98,7 +99,7 @@ self.addEventListener("fetch", function (event) {
         })
         .catch(function () {
           return caches.match("app.html").then(function (cached) {
-            return cached || caches.match("./");
+            return cached || caches.match("./") || caches.match("index.html");
           });
         })
     );

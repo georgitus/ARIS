@@ -25,15 +25,16 @@ npx serve .
 python -m http.server 8080
 ```
 
-Abrí `app.html` en el navegador (o `http://localhost:8080/app.html`) e instalá la app desde el menú del navegador si querés.
+Abrí `index.html` en el navegador (o `http://localhost:8080/`) e instalá la app desde el menú del navegador si querés. También podés entrar directamente a `app.html` o ver el showcase en `prototype.html`.
 
 ## Estructura
 
 ```
-app.html          # La app PWA (pantallas del mockup)
-app-mobile.css    # Adaptación full-screen con safe-areas
+index.html        # Punto de entrada principal (lanza la app automáticamente)
+app.html          # La app PWA interactiva (8 pantallas móviles)
+app-mobile.css    # Adaptación full-screen con safe-areas y vista desktop
 pwa.js            # Router, sesión, instalación, SW
-sw.js             # Service worker (offline)
+sw.js             # Service worker (soporte offline)
 manifest.json     # Manifest de la PWA
 icons/            # Iconos de la app (any + maskable)
 app.js            # Interacciones del prototipo (guía, voz, filtros)
