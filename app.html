@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A192F">
+  <meta name="description" content="ARIS — Tu aliado en emergencias. Asistencia por voz, alertas y guías de primeros auxilios.">
+  <title>ARIS — Tu aliado en emergencias</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ARIS">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="app-mobile.css">
+</head>
+<body class="aris-app">
+
+  <!-- ============================================================
+       Sprite de iconos
+       ============================================================ -->
+  <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <symbol id="i-heart-pulse" viewBox="0 0 24 24">
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+      <path d="M3 11.5h3.6l1.5-2.6 2.4 5.2 1.6-2.6H21"/>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>
+      <path d="M12 9v4"/><path d="M12 17h.01"/>
+    </symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24">
+      <path d="m3 11 18-5v12L3 13v-2Z"/>
+      <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+    </symbol>
+    <symbol id="i-book" viewBox="0 0 24 24">
+      <path d="M12 7v14"/>
+      <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/>
+    </symbol>
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="m3 10.5 9-7.5 9 7.5"/>
+      <path d="M5 9.5V21h14V9.5"/>
+      <path d="M9 21v-6h6v6"/>
+    </symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+      <path d="M10.3 21a2 2 0 0 0 3.4 0"/>
+    </symbol>
+    <symbol id="i-user" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 21a8 8 0 0 1 16 0"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c1 .3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/>
+    </symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24">
+      <rect x="9" y="2" width="6" height="11" rx="3"/>
+      <path d="M5 10a7 7 0 0 0 14 0"/>
+      <path d="M12 19v3"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path d="M7 4.5 19 12 7 19.5Z"/>
+    </symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24">
+      <rect x="6" y="4" width="4" height="16" rx="1.4"/>
+      <rect x="14" y="4" width="4" height="16" rx="1.4"/>
+    </symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24">
+      <rect x="6" y="6" width="12" height="12" rx="2"/>
+    </symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24">
+      <path d="m9 18 6-6-6-6"/>
+    </symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24">
+      <path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>
+    </symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24">
+      <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+    </symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24">
+      <path d="M12 5v14"/><path d="m6 13 6 6 6-6"/>
+    </symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24">
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24">
+      <path d="m3 3 18 18"/>
+      <path d="M10.6 5.1A10.9 10.9 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-3.2 4.2"/>
+      <path d="M6.6 6.6A18 18 0 0 0 2 12s3.5 7 10 7a10.8 10.8 0 0 0 5.4-1.4"/>
+      <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect x="2" y="4" width="20" height="16" rx="2.5"/>
+      <path d="m2.5 7 9.5 6 9.5-6"/>
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <rect x="4" y="10" width="16" height="11" rx="2.5"/>
+      <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+    </symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="17" rx="2.5"/>
+      <path d="M8 2v4M16 2v4M3 10h18"/>
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+      <path d="m9 12 2 2 4-4"/>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 7v5l3 2"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="m5 13 4 4L19 7"/>
+    </symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/>
+    </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M3 12h18"/>
+      <path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/>
+    </symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24">
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+      <path d="m16 17 5-5-5-5"/><path d="M21 12H9"/>
+    </symbol>
+    <symbol id="i-share" viewBox="0 0 24 24">
+      <circle cx="18" cy="5" r="3"/>
+      <circle cx="6" cy="12" r="3"/>
+      <circle cx="18" cy="19" r="3"/>
+      <path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/>
+    </symbol>
+    <symbol id="i-send" viewBox="0 0 24 24">
+      <path d="m22 2-7 20-4-9-9-4Z"/>
+      <path d="M22 2 11 13"/>
+    </symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24">
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+    </symbol>
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M22 21v-2a4 4 0 0 0-3-3.9"/>
+      <path d="M16 3.1a4 4 0 0 1 0 7.8"/>
+    </symbol>
+    <symbol id="i-badge-check" viewBox="0 0 24 24">
+      <path d="m12 2 2.4 1.8 3-.3 1 2.8L21 7.8l-.6 3 .6 3-2.6 1.5-1 2.8-3-.3L12 22l-2.4-1.8-3 .3-1-2.8L3 16.2l.6-3-.6-3 2.6-1.5 1-2.8 3 .3L12 2Z"/>
+      <path d="m9 12 2 2 4-4"/>
+    </symbol>
+    <symbol id="i-headset" viewBox="0 0 24 24">
+      <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+      <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5Z"/>
+      <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5Z"/>
+    </symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24">
+      <path d="M19 21 12 16 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16Z"/>
+    </symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24">
+      <path d="M11 5 6 9H2v6h4l5 4V5Z"/>
+      <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+      <path d="M18.5 5.5a9 9 0 0 1 0 13"/>
+    </symbol>
+    <symbol id="i-volume-off" viewBox="0 0 24 24">
+      <path d="M11 5 6 9H2v6h4l5 4V5Z"/>
+      <path d="m16 9 5 5"/>
+      <path d="m21 9-5 5"/>
+    </symbol>
+    <symbol id="i-droplet" viewBox="0 0 24 24">
+      <path d="M12 2.7 6.3 8.4a8 8 0 1 0 11.4 0L12 2.7Z"/>
+    </symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24">
+      <path d="M12 20h9"/>
+      <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+    </symbol>
+  </svg>
+
+  <div id="app">
+
+    <!-- ==========================================================
+         01 · Bienvenida
+         ========================================================== -->
+    <section class="screen screen--splash" data-view="bienvenida" aria-label="Bienvenida de ARIS">
+      <div class="scene" aria-hidden="true">
+        <svg class="scene__art" viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="sceneSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#061323"/>
+              <stop offset=".42" stop-color="#0B2440"/>
+              <stop offset=".72" stop-color="#123354"/>
+              <stop offset="1" stop-color="#0A192F"/>
+            </linearGradient>
+            <linearGradient id="ecgGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#38BDF8" stop-opacity="0"/>
+              <stop offset=".28" stop-color="#38BDF8" stop-opacity=".55"/>
+              <stop offset=".5" stop-color="#7DD3FC" stop-opacity=".95"/>
+              <stop offset=".72" stop-color="#38BDF8" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+            </linearGradient>
+            <filter id="ecgGlow" x="-20%" y="-200%" width="140%" height="500%">
+              <feGaussianBlur stdDeviation="3.2" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <rect width="390" height="844" fill="url(#sceneSky)"/>
+
+          <path d="M0 470 48 420 86 448 132 388 176 438 218 400 262 444 306 405 348 440 390 410V844H0Z" fill="#143458" opacity=".9"/>
+          <path d="M0 535 52 486 96 514 150 452 202 505 250 472 298 516 344 482 390 510V844H0Z" fill="#0F2A48"/>
+          <path d="M0 615 46 570 94 600 148 548 202 592 252 558 300 598 346 566 390 594V844H0Z" fill="#091C32"/>
+
+          <g fill="none" stroke="#2E5B80" stroke-opacity=".3" stroke-width="1">
+            <path d="M132 388 176 438 218 400"/>
+            <path d="M150 452 202 505 250 472"/>
+            <path d="M148 548 202 592 252 558"/>
+          </g>
+
+          <g filter="url(#ecgGlow)">
+            <path class="ecg-line" d="M-12 505H62l12-5 9-30 12 62 10-28 7 6h90l14-8 10-42 14 84 12-38 9 8h109" fill="none" stroke="url(#ecgGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="ecg-spark" d="M-12 505H62l12-5 9-30 12 62 10-28 7 6h90l14-8 10-42 14 84 12-38 9 8h109" fill="none" stroke="#D8F0FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="70 1100"/>
+          </g>
+        </svg>
+        <div class="scene__veil"></div>
+      </div>
+
+      <div class="splash__content">
+        <div class="splash__brand">
+          <span class="brandmark" aria-hidden="true">
+            <svg class="icon" aria-hidden="true"><use href="#i-heart-pulse"/></svg>
+          </span>
+          <h3 class="splash__word">ARIS</h3>
+          <p class="splash__tagline">Tu aliado en emergencias</p>
+        </div>
+
+        <div class="splash__bottom">
+          <p class="eyebrow eyebrow--cyan">Bienvenido</p>
+          <h3 class="splash__title">Ayuda real, cuando más la necesitás.</h3>
+          <p class="splash__copy">Emergencias, salud y guías de actuación en una sola aplicación.</p>
+          <div class="splash__actions">
+            <button class="btn btn--primary" type="button" data-start>
+              Comenzar
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </button>
+            <button class="btn btn--ghost" type="button" data-have-account>Ya tengo una cuenta</button>
+          </div>
+          <p class="splash__legal">Al continuar aceptás los <a href="#">Términos de uso</a> y la <a href="#">Política de privacidad</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         02 · Registro
+         ========================================================== -->
+    <section class="screen screen--auth" data-view="registro" aria-label="Registro de cuenta">
+      <div class="auth__glow" aria-hidden="true"></div>
+
+      <div class="appbar">
+        <a class="icon-btn" href="#/bienvenida" data-back="bienvenida" aria-label="Volver">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+        </a>
+        <span class="appbar__spacer"></span>
+        <span class="appbar__hint">Nueva cuenta</span>
+      </div>
+
+      <div class="auth__scroll">
+        <header class="auth__head">
+          <p class="eyebrow">Nueva cuenta</p>
+          <h3>Creá tu cuenta</h3>
+          <p>Completá tus datos para recibir asistencia personalizada.</p>
+        </header>
+
+        <form class="form" data-register-form>
+          <div class="field">
+            <label class="field__label" for="reg-name">Nombre completo</label>
+            <div class="field__control">
+              <svg class="icon field__icon" aria-hidden="true"><use href="#i-user"/></svg>
+              <input class="field__input" id="reg-name" name="name" type="text" placeholder="Martina Gómez" autocomplete="name">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="reg-age">Edad</label>
+            <div class="field__control">
+              <svg class="icon field__icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+              <input class="field__input" id="reg-age" name="age" type="text" inputmode="numeric" placeholder="28" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="reg-email">Correo electrónico</label>
+            <div class="field__control">
+              <svg class="icon field__icon" aria-hidden="true"><use href="#i-mail"/></svg>
+              <input class="field__input" id="reg-email" name="email" type="email" placeholder="nombre@correo.com" autocomplete="email">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="reg-password">Contraseña</label>
+            <div class="field__control">
+              <svg class="icon field__icon" aria-hidden="true"><use href="#i-lock"/></svg>
+              <input class="field__input" id="reg-password" name="password" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password">
+              <button class="field__toggle" type="button" data-toggle-password aria-label="Mostrar contraseña" aria-controls="reg-password">
+                <svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <label class="checkbox">
+            <input type="checkbox" checked>
+            <span class="checkbox__box" aria-hidden="true">
+              <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
+            </span>
+            <span>Acepto los <a href="#">términos</a> y la <a href="#">política de privacidad</a>.</span>
+          </label>
+
+          <button class="btn btn--primary btn--full" type="submit">
+            Crear cuenta
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </button>
+        </form>
+
+        <p class="auth__alt">¿Ya tenés una cuenta? <a href="#/inicio">Iniciá sesión</a></p>
+        <p class="auth__secure">
+          <svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>
+          Tus datos se guardan solo en este dispositivo.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         03 · Inicio
+         ========================================================== -->
+    <section class="screen screen--home" data-view="inicio" aria-label="Pantalla principal">
+      <div class="screen__scroll home__scroll">
+        <header class="home__head">
+          <span class="avatar" data-user-initials aria-hidden="true">MG<span class="avatar__status" aria-hidden="true"></span></span>
+          <div class="home__greeting">
+            <p class="home__date" data-today>Lunes, 2 de noviembre</p>
+            <h3 data-home-greeting>Hola, ¿cómo estás?</h3>
+          </div>
+          <a class="icon-btn icon-btn--bell" href="#/alertas" aria-label="Notificaciones">
+            <svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg>
+            <span class="dot" data-unread-badge aria-hidden="true"></span>
+          </a>
+        </header>
+
+        <div class="status-strip">
+          <span class="status-strip__left"><span class="pulse-dot" aria-hidden="true"></span> Protección activa</span>
+          <span class="status-strip__right">
+            <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
+            Zona Norte
+          </span>
+        </div>
+
+        <div class="section-head">
+          <h3>Accesos rápidos</h3>
+          <span class="section-head__meta">Módulos</span>
+        </div>
+
+        <div class="quick-grid">
+          <a class="quick-card quick-card--health" href="#/perfil">
+            <span class="quick-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-heart-pulse"/></svg></span>
+            <span class="quick-card__arrow"><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+            <span class="quick-card__body">
+              <strong>Mi salud</strong>
+              <span>Signos vitales y ficha</span>
+            </span>
+          </a>
+
+          <a class="quick-card quick-card--emergency" href="#/sismo">
+            <span class="quick-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg></span>
+            <span class="quick-card__arrow"><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+            <span class="quick-card__body">
+              <strong>Emergencias</strong>
+              <span>SOS, llamadas y reportes</span>
+            </span>
+          </a>
+
+          <a class="quick-card quick-card--alerts" href="#/alertas">
+            <span class="quick-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-megaphone"/></svg></span>
+            <span class="quick-card__badge" data-unread-badge>2</span>
+            <span class="quick-card__body">
+              <strong>Alertas</strong>
+              <span>Avisos de tu zona</span>
+            </span>
+          </a>
+
+          <a class="quick-card quick-card--guide" href="#/rcp">
+            <span class="quick-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
+            <span class="quick-card__arrow"><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+            <span class="quick-card__body">
+              <strong>Guía</strong>
+              <span>Primeros auxilios y RCP</span>
+            </span>
+          </a>
+        </div>
+
+        <a class="alert-row" href="#/alertas">
+          <span class="alert-row__icon"><svg class="icon" aria-hidden="true"><use href="#i-activity"/></svg></span>
+          <span class="alert-row__body">
+            <strong>Sismo de magnitud 6.4</strong>
+            <span>Zona Norte · hace 3 min</span>
+          </span>
+          <span class="tag tag--danger">Alta</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        </a>
+
+        <div class="section-head section-head--contacts">
+          <h3>Contactos de confianza</h3>
+          <button class="link-btn" type="button" data-toast="Gestión de contactos en camino">Gestionar</button>
+        </div>
+
+        <div class="contacts-row">
+          <a class="contact" href="tel:+5491100000001" aria-label="Llamar a María">
+            <span class="avatar avatar--xs" data-initials="ML" aria-hidden="true"></span>
+            <span class="contact__name">María</span>
+            <span class="contact__call"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+          </a>
+          <a class="contact" href="tel:+5491100000002" aria-label="Llamar a Diego">
+            <span class="avatar avatar--xs" data-initials="DR" aria-hidden="true"></span>
+            <span class="contact__name">Diego</span>
+            <span class="contact__call"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+          </a>
+          <a class="contact" href="tel:+5491100000003" aria-label="Llamar a Lucía">
+            <span class="avatar avatar--xs" data-initials="LP" aria-hidden="true"></span>
+            <span class="contact__name">Lucía</span>
+            <span class="contact__call"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+          </a>
+        </div>
+
+        <div class="support-banner">
+          <span class="support-banner__icon"><svg class="icon" aria-hidden="true"><use href="#i-headset"/></svg></span>
+          <span class="support-banner__body">
+            <strong>Estamos para ayudarte</strong>
+            <span>Soporte disponible 24/7</span>
+          </span>
+          <button class="support-banner__action" type="button" data-toast="Soporte: soporte@aris.app" aria-label="Contactar con soporte">
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="home-indicator" aria-hidden="true"></div>
+    </section>
+
+    <!-- ==========================================================
+         04 · Emergencia natural (sismo)
+         ========================================================== -->
+    <section class="screen screen--quake" data-view="sismo" aria-label="Emergencia por sismo">
+      <div class="appbar">
+        <a class="icon-btn" href="#/inicio" data-back="inicio" aria-label="Volver al inicio">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+        </a>
+        <h3 class="appbar__title">Emergencia natural</h3>
+        <span class="appbar__spacer"></span>
+        <a class="icon-btn" href="#/voz" aria-label="Asistencia por voz">
+          <svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg>
+        </a>
+        <button class="icon-btn" type="button" data-toast="Ubicación y tipo de emergencia enviada" aria-label="Compartir emergencia">
+          <svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>
+        </button>
+      </div>
+
+      <div class="screen__scroll quake__scroll">
+        <div class="quake-hero">
+          <svg class="quake-hero__art" viewBox="0 0 350 204" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="quakeSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#18395B"/>
+                <stop offset=".55" stop-color="#102945"/>
+                <stop offset="1" stop-color="#0A1B30"/>
+              </linearGradient>
+              <radialGradient id="quakeGlow" cx=".72" cy=".16" r=".62">
+                <stop offset="0" stop-color="#F87171" stop-opacity=".4"/>
+                <stop offset="1" stop-color="#F87171" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="quakeBlur" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="7"/>
+              </filter>
+            </defs>
+
+            <rect width="350" height="204" fill="url(#quakeSky)"/>
+            <rect width="350" height="204" fill="url(#quakeGlow)"/>
+
+            <g fill="#0B2036">
+              <rect x="4" y="112" width="54" height="92"/>
+              <rect x="64" y="90" width="36" height="114"/>
+              <rect x="204" y="100" width="46" height="104"/>
+              <rect x="256" y="118" width="38" height="86"/>
+              <rect x="300" y="94" width="46" height="110"/>
+            </g>
+
+            <g fill="#7DD3FC" opacity=".13">
+              <rect x="12" y="124" width="5" height="7"/><rect x="24" y="124" width="5" height="7"/><rect x="36" y="124" width="5" height="7"/>
+              <rect x="12" y="142" width="5" height="7"/><rect x="36" y="142" width="5" height="7"/>
+              <rect x="72" y="104" width="5" height="7"/><rect x="84" y="104" width="5" height="7"/>
+              <rect x="72" y="122" width="5" height="7"/><rect x="84" y="140" width="5" height="7"/>
+              <rect x="214" y="114" width="5" height="7"/><rect x="228" y="114" width="5" height="7"/><rect x="240" y="132" width="5" height="7"/>
+              <rect x="266" y="130" width="5" height="7"/><rect x="278" y="148" width="5" height="7"/>
+              <rect x="310" y="108" width="5" height="7"/><rect x="324" y="108" width="5" height="7"/><rect x="310" y="126" width="5" height="7"/>
+            </g>
+
+            <path d="M112 54h52l6 12-10 8 8 12h22v118h-78Z" fill="#143A5C"/>
+            <path d="M112 54h52l6 12-10 8 8 12h22" fill="none" stroke="#3E6B92" stroke-width="1.4" opacity=".7"/>
+
+            <g fill="#FCD34D" opacity=".38">
+              <rect x="124" y="106" width="10" height="8" rx="1"/>
+              <rect x="146" y="106" width="10" height="8" rx="1"/>
+              <rect x="124" y="132" width="10" height="8" rx="1"/>
+              <rect x="168" y="132" width="10" height="8" rx="1"/>
+              <rect x="146" y="158" width="10" height="8" rx="1"/>
+              <rect x="168" y="158" width="10" height="8" rx="1"/>
+              <rect x="146" y="184" width="10" height="8" rx="1"/>
+            </g>
+
+            <g fill="none" stroke="#8FB4CE" stroke-width="1.5" stroke-linecap="round" opacity=".55">
+              <path d="M150 70l7 16-10 12 9 15-6 18 11 14"/>
+              <path d="m157 86 14 8"/>
+              <path d="m147 98-14 10"/>
+              <path d="m160 131 16 10"/>
+              <path d="m138 70-8 14 6 12"/>
+            </g>
+
+            <g fill="#081726">
+              <rect x="0" y="178" width="350" height="26"/>
+              <path d="M0 178h36l10-12 8 12h40l8-8 6 8h52l10-14 10 14h44l8-10 8 10h54l8-12 8 12h40v26H0Z" opacity=".85"/>
+            </g>
+
+            <g fill="#1D3E5C">
+              <rect x="86" y="188" width="14" height="6" rx="1" transform="rotate(-12 93 191)"/>
+              <rect x="210" y="190" width="18" height="5" rx="1" transform="rotate(8 219 192)"/>
+              <rect x="244" y="185" width="10" height="7" rx="1" transform="rotate(-18 249 188)"/>
+            </g>
+
+            <ellipse cx="145" cy="192" rx="118" ry="20" fill="#9FB6D1" opacity=".07" filter="url(#quakeBlur)"/>
+          </svg>
+          <div class="quake-hero__veil" aria-hidden="true"></div>
+
+          <div class="quake-hero__top">
+            <span class="tag tag--danger-solid"><span class="pulse-dot pulse-dot--light" aria-hidden="true"></span> Sismo</span>
+            <span class="chip chip--glass">
+              <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+              Hace 3 min
+            </span>
+          </div>
+
+          <div class="quake-hero__bottom">
+            <div class="quake-mag">
+              <strong>6.4</strong>
+              <span>Magnitud</span>
+            </div>
+            <div class="quake-hero__meta">
+              <span class="tag tag--danger">Gravedad alta</span>
+              <span class="quake-hero__note">Réplicas posibles</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quake-loc">
+          <span>
+            <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
+            Zona Norte, 8 km al NE
+          </span>
+          <span class="quake-loc__sep" aria-hidden="true"></span>
+          <span>Profundidad 12 km</span>
+        </div>
+
+        <div class="callout callout--danger">
+          <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+          <p><strong>Mantené la calma.</strong> Seguí los pasos y ayudá a quien lo necesite.</p>
+        </div>
+
+        <div class="section-head">
+          <h3>¿Qué podés hacer?</h3>
+          <span class="section-head__meta">4 pasos</span>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num">1</span>
+            <div class="step__body">
+              <strong>Alejate de las ventanas</strong>
+              <p>Y de objetos que puedan caer.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">2</span>
+            <div class="step__body">
+              <strong>Cubrite bajo una mesa firme</strong>
+              <p>Protegé tu cabeza y cuello.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">3</span>
+            <div class="step__body">
+              <strong>No uses ascensores</strong>
+              <p>Usá siempre las escaleras.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">4</span>
+            <div class="step__body">
+              <strong>Evacuá al punto de encuentro</strong>
+              <p>Cuando el movimiento haya terminado.</p>
+            </div>
+          </li>
+        </ol>
+
+        <a class="btn btn--ghost btn--full quake-voice-cta" href="#/voz">
+          <svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg>
+          Hablar con la asistencia por voz
+        </a>
+
+        <div class="quake-note">
+          <svg class="icon" aria-hidden="true"><use href="#i-volume"/></svg>
+          <p>Mantené el volumen activo para recibir instrucciones.</p>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <a class="btn btn--danger" href="tel:911">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+          Llamar al 911
+        </a>
+        <button class="icon-btn icon-btn--lg" type="button" data-toast="Tu ubicación se compartió con tus contactos" aria-label="Compartir ubicación">
+          <svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         05 · Modo activo por voz
+         ========================================================== -->
+    <section class="screen screen--voice" data-view="voz" aria-label="Asistencia por voz">
+      <div class="appbar">
+        <a class="icon-btn" href="#/sismo" data-back="sismo" aria-label="Volver a la emergencia">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+        </a>
+        <h3 class="appbar__title">Asistencia por voz</h3>
+        <span class="appbar__spacer"></span>
+        <span class="live-pill"><span class="pulse-dot" aria-hidden="true"></span> <span data-voice-status aria-live="polite">Activo</span></span>
+      </div>
+
+      <div class="screen__scroll voice__scroll">
+        <div class="voice__hero">
+          <div class="orb" aria-hidden="true">
+            <span class="orb__ring orb__ring--1"></span>
+            <span class="orb__ring orb__ring--2"></span>
+            <span class="orb__ring orb__ring--3"></span>
+            <span class="orb__core">
+              <svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg>
+            </span>
+          </div>
+          <h3>Hablá ahora</h3>
+          <p>Contá qué está pasando. ARIS te va a guiar paso a paso.</p>
+          <button class="voice__listen" type="button" data-voice-play aria-label="Escuchar al asistente">
+            <svg class="icon" aria-hidden="true"><use href="#i-volume"/></svg>
+            <span data-voice-play-label>Escuchar al asistente</span>
+          </button>
+        </div>
+
+        <div class="waveform" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="transcript">
+          <span class="transcript__icon" aria-hidden="true">
+            <svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg>
+          </span>
+          <div class="transcript__body">
+            <p data-voice-transcript>“Hay un sismo en mi zona…”</p>
+            <span class="transcript__status"><span class="dot dot--cyan" aria-hidden="true"></span> <span data-voice-transcript-status>Transcribiendo en tiempo real</span></span>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h3>Opciones rápidas</h3>
+        </div>
+
+        <div class="quick-actions">
+          <button class="quick-action is-active" type="button" aria-pressed="true" data-voice-track="sismo">Hay un sismo en mi zona</button>
+          <button class="quick-action" type="button" aria-pressed="false" data-voice-track="ambulancia">Necesito una ambulancia</button>
+          <button class="quick-action" type="button" aria-pressed="false" data-voice-track="rcp">Alguien no respira</button>
+          <button class="quick-action" type="button" aria-pressed="false" data-voice-track="atrapado">Estoy atrapado</button>
+        </div>
+
+        <div class="voice__actions">
+          <button class="btn btn--primary btn--full" type="button" data-voice-send>
+            <svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>
+            <span data-voice-send-label>Enviar alerta</span>
+          </button>
+          <button class="btn btn--ghost btn--full" type="button" data-voice-stop>
+            <svg class="icon" aria-hidden="true"><use href="#i-stop"/></svg>
+            <span data-voice-stop-label>Detener escucha</span>
+          </button>
+          <p class="voice__secure">
+            <svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>
+            Audio cifrado de extremo a extremo
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         06 · Guía paso a paso (RCP)
+         ========================================================== -->
+    <section class="screen screen--cpr" data-view="rcp" aria-label="Guía de RCP paso a paso">
+      <div class="appbar">
+        <a class="icon-btn" href="#/inicio" data-back="inicio" aria-label="Volver al inicio">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+        </a>
+        <h3 class="appbar__title">Guía de RCP</h3>
+        <span class="appbar__spacer"></span>
+        <button class="icon-btn" type="button" data-toast="Guía guardada en tu biblioteca" aria-label="Guardar guía">
+          <svg class="icon" aria-hidden="true"><use href="#i-bookmark"/></svg>
+        </button>
+      </div>
+
+      <div class="screen__scroll cpr__scroll">
+        <div class="maneuver-row" role="group" aria-label="Elegir maniobra">
+          <button class="maneuver is-active" type="button" data-maneuver="adultos" aria-pressed="true">RCP adultos</button>
+          <button class="maneuver" type="button" data-maneuver="ninos" aria-pressed="false">RCP niños</button>
+          <button class="maneuver" type="button" data-maneuver="atragantamiento" aria-pressed="false">Atragantamiento</button>
+          <button class="maneuver" type="button" data-maneuver="hemorragia" aria-pressed="false">Hemorragia</button>
+        </div>
+
+        <div class="video-card" data-guide>
+          <div class="video-card__stage" data-guide-stage aria-hidden="true"></div>
+          <div class="video-card__veil" aria-hidden="true"></div>
+
+          <div class="video-card__top">
+            <span class="chip chip--glass" data-guide-label>RCP adultos</span>
+            <div class="video-card__controls">
+              <button class="video-card__control" type="button" data-guide-sound aria-pressed="true" aria-label="Silenciar audio de la guía">
+                <svg class="icon" aria-hidden="true"><use href="#i-volume"/></svg>
+              </button>
+              <button class="video-card__control" type="button" data-guide-toggle aria-label="Reproducir guía">
+                <svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <button class="video-card__play" type="button" data-guide-play aria-label="Reproducir guía">
+            <svg class="icon icon--fill" aria-hidden="true"><use href="#i-play"/></svg>
+          </button>
+
+          <div class="video-card__bottom">
+            <span class="video-card__step" data-guide-step-label aria-live="polite">Paso 1 de 4 · Verificá la respiración</span>
+            <div class="video-card__timeline">
+              <span class="video-card__progress" data-guide-progress>
+                <span class="video-card__knob" aria-hidden="true"></span>
+              </span>
+            </div>
+            <div class="video-card__time">
+              <span data-guide-current>0:00</span>
+              <span data-guide-total>0:31</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cpr__title">
+          <div>
+            <h3 data-guide-title>RCP en adultos</h3>
+            <p data-guide-meta>Guía básica de reanimación</p>
+          </div>
+          <span class="chip chip--soft" data-guide-duration>4 min</span>
+        </div>
+
+        <div class="section-head">
+          <h3>Paso a paso</h3>
+          <span class="section-head__meta" data-guide-count>1 de 4</span>
+        </div>
+
+        <ol class="cpr-steps" data-guide-steps>
+          <li class="cpr-step is-active">
+            <button class="cpr-step__btn" type="button" data-step="0" aria-label="Ir al paso 1: Verificá la respiración" aria-current="step">
+              <span class="cpr-step__num">1</span>
+              <span class="cpr-step__body">
+                <strong>Verificá la respiración</strong>
+                <span class="cpr-step__text">Observá el pecho durante 10 segundos.</span>
+              </span>
+            </button>
+          </li>
+          <li class="cpr-step">
+            <button class="cpr-step__btn" type="button" data-step="1" aria-label="Ir al paso 2: Llamá al 911">
+              <span class="cpr-step__num">2</span>
+              <span class="cpr-step__body">
+                <strong>Llamá al 911</strong>
+                <span class="cpr-step__text">Pedí una ambulancia y un DEA.</span>
+              </span>
+            </button>
+          </li>
+          <li class="cpr-step">
+            <button class="cpr-step__btn" type="button" data-step="2" aria-label="Ir al paso 3: Iniciá las compresiones">
+              <span class="cpr-step__num">3</span>
+              <span class="cpr-step__body">
+                <strong>Iniciá las compresiones</strong>
+                <span class="cpr-step__text">Centro del pecho, manos entrelazadas.</span>
+              </span>
+            </button>
+          </li>
+          <li class="cpr-step">
+            <button class="cpr-step__btn" type="button" data-step="3" aria-label="Ir al paso 4: Continuá hasta que llegue ayuda">
+              <span class="cpr-step__num">4</span>
+              <span class="cpr-step__body">
+                <strong>Continuá hasta que llegue ayuda</strong>
+                <span class="cpr-step__text">No interrumpas el ritmo.</span>
+              </span>
+            </button>
+          </li>
+        </ol>
+
+        <div class="metrics" data-guide-metrics>
+          <div class="metric">
+            <span class="metric__icon"><svg class="icon" aria-hidden="true"><use href="#i-activity"/></svg></span>
+            <div class="metric__body">
+              <span>Frecuencia</span>
+              <strong>100–120</strong>
+              <small>compresiones / min</small>
+            </div>
+          </div>
+          <div class="metric">
+            <span class="metric__icon"><svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg></span>
+            <div class="metric__body">
+              <span>Profundidad</span>
+              <strong>5–6</strong>
+              <small>centímetros</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="cpr-tip">
+          <svg class="icon" aria-hidden="true"><use href="#i-volume"/></svg>
+          <p><strong>Recordá:</strong> <span data-guide-tip>30 compresiones y 2 ventilaciones por ciclo.</span></p>
+        </div>
+
+        <button class="btn btn--primary btn--full cpr__cta" type="button" data-guide-next>
+          <svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>
+          <span data-guide-next-label>Continuar guía</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         07 · Alertas
+         ========================================================== -->
+    <section class="screen screen--alerts" data-view="alertas" aria-label="Alertas de la zona">
+      <div class="screen__scroll alerts__scroll">
+        <header class="page-head">
+          <div>
+            <p class="eyebrow">Centro de avisos</p>
+            <h3>Alertas</h3>
+          </div>
+          <button class="link-btn" type="button" data-mark-read>Marcar leídas</button>
+        </header>
+
+        <div class="alerts-summary">
+          <span class="alerts-summary__badge" data-unread-badge>2</span>
+          <p>
+            <strong data-unread-label>2 alertas nuevas</strong>
+            <span>en tu zona</span>
+          </p>
+          <span class="chip chip--soft">
+            <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
+            Zona Norte
+          </span>
+        </div>
+
+        <div class="filter-row" role="tablist" aria-label="Filtrar alertas">
+          <button class="filter is-active" type="button" role="tab" aria-selected="true">Todas</button>
+          <button class="filter" type="button" role="tab" aria-selected="false">Sismo</button>
+          <button class="filter" type="button" role="tab" aria-selected="false">Salud</button>
+          <button class="filter" type="button" role="tab" aria-selected="false">Clima</button>
+        </div>
+
+        <div class="alert-list">
+          <article class="alert-card alert-card--danger is-unread" role="button" tabindex="0">
+            <span class="alert-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-activity"/></svg></span>
+            <div class="alert-card__body">
+              <h4>Sismo de magnitud 6.4</h4>
+              <p>Réplicas posibles en las próximas 24 horas. Evitá estructuras dañadas.</p>
+              <div class="alert-card__meta">
+                <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+                <span>Hace 3 min · Zona Norte</span>
+                <span class="tag tag--danger">Alta</span>
+              </div>
+            </div>
+            <span class="alert-card__unread" role="img" aria-label="Sin leer"></span>
+          </article>
+
+          <article class="alert-card alert-card--warn is-unread" role="button" tabindex="0">
+            <span class="alert-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-heart-pulse"/></svg></span>
+            <div class="alert-card__body">
+              <h4>Alerta sanitaria por dengue</h4>
+              <p>Reforzá el uso de repelente y eliminá el agua estancada.</p>
+              <div class="alert-card__meta">
+                <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+                <span>Hace 2 h · Ciudad</span>
+                <span class="tag tag--warn">Media</span>
+              </div>
+            </div>
+            <span class="alert-card__unread" role="img" aria-label="Sin leer"></span>
+          </article>
+
+          <article class="alert-card alert-card--info" role="button" tabindex="0">
+            <span class="alert-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-droplet"/></svg></span>
+            <div class="alert-card__body">
+              <h4>Corte de agua programado</h4>
+              <p>Servicio restablecido a las 18:00. Guardá agua para consumo.</p>
+              <div class="alert-card__meta">
+                <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+                <span>Hace 5 h · Sector Centro</span>
+                <span class="tag tag--info">Info</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="alert-card alert-card--warn" role="button" tabindex="0">
+            <span class="alert-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg></span>
+            <div class="alert-card__body">
+              <h4>Réplica de magnitud 4.1</h4>
+              <p>Sin daños reportados. Mantené la precaución en edificios.</p>
+              <div class="alert-card__meta">
+                <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+                <span>Ayer 21:40 · Zona Norte</span>
+                <span class="tag tag--warn">Media</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <button class="btn btn--ghost btn--full alerts__history" type="button" data-toast="El historial completo estará disponible pronto">
+          <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+          Ver historial completo
+        </button>
+
+        <p class="alerts__footnote">Fuente: Defensa Civil · Última sincronización al abrir la app</p>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         08 · Perfil
+         ========================================================== -->
+    <section class="screen screen--profile" data-view="perfil" aria-label="Perfil de usuario">
+      <div class="appbar">
+        <h3 class="appbar__title">Mi perfil</h3>
+        <span class="appbar__spacer"></span>
+        <button class="icon-btn" type="button" data-toast="Configuración avanzada en camino" aria-label="Configuración de la cuenta">
+          <svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg>
+        </button>
+      </div>
+
+      <div class="screen__scroll profile__scroll">
+        <div class="profile-card">
+          <span class="avatar avatar--lg" data-user-initials aria-hidden="true">MG<span class="avatar__status" aria-hidden="true"></span></span>
+          <div class="profile-card__body">
+            <div class="profile-card__name">
+              <h3 data-user-name>Martina Gómez</h3>
+              <span class="verified">
+                <svg class="icon" aria-hidden="true"><use href="#i-badge-check"/></svg>
+                Verificada
+              </span>
+            </div>
+            <p data-user-email>martina.gomez@correo.com</p>
+            <span class="profile-card__meta" data-user-meta>
+              <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
+              Zona Norte · 28 años
+            </span>
+          </div>
+          <button class="icon-btn icon-btn--sm" type="button" data-toast="Edición de perfil en camino" aria-label="Editar perfil">
+            <svg class="icon" aria-hidden="true"><use href="#i-edit"/></svg>
+          </button>
+        </div>
+
+        <div class="medical-card">
+          <div class="medical-card__head">
+            <span>
+              <svg class="icon" aria-hidden="true"><use href="#i-heart-pulse"/></svg>
+              Ficha médica
+            </span>
+            <button class="link-btn" type="button" data-toast="Edición de la ficha médica en camino">Ver</button>
+          </div>
+          <div class="medical-card__grid">
+            <div><span>Sangre</span><strong>O+</strong></div>
+            <div><span>Alergias</span><strong>Penicilina</strong></div>
+            <div><span>Condición</span><strong>Asma</strong></div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h3>Ajustes</h3>
+        </div>
+
+        <div class="settings-card">
+          <div class="setting">
+            <span class="setting__icon"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></span>
+            <div class="setting__body">
+              <strong>Notificaciones</strong>
+              <span>Alertas y recordatorios</span>
+            </div>
+            <label class="switch" data-notify-switch>
+              <input type="checkbox" role="switch" aria-label="Activar notificaciones" checked>
+              <span class="switch__track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="setting">
+            <span class="setting__icon"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span>
+            <div class="setting__body">
+              <strong>Ubicación en emergencias</strong>
+              <span>Compartir con contactos</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" role="switch" aria-label="Compartir ubicación en emergencias" checked>
+              <span class="switch__track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <button class="setting" type="button" data-toast="Gestión de contactos de confianza en camino">
+            <span class="setting__icon"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span>
+            <div class="setting__body">
+              <strong>Contactos de confianza</strong>
+              <span>3 personas</span>
+            </div>
+            <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+          </button>
+
+          <button class="setting" type="button" data-toast="Idiomas adicionales en camino">
+            <span class="setting__icon"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg></span>
+            <div class="setting__body">
+              <strong>Idioma</strong>
+              <span>Español</span>
+            </div>
+            <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+          </button>
+
+          <button class="setting" type="button" data-toast="Tus datos se guardan solo en este dispositivo">
+            <span class="setting__icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <div class="setting__body">
+              <strong>Privacidad y datos</strong>
+              <span>Permisos y seguridad</span>
+            </div>
+            <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+          </button>
+        </div>
+
+        <div class="profile-help">
+          <span class="profile-help__icon"><svg class="icon" aria-hidden="true"><use href="#i-headset"/></svg></span>
+          <div class="profile-help__body">
+            <strong>¿Necesitás ayuda?</strong>
+            <span>Soporte disponible 24/7</span>
+          </div>
+          <button class="icon-btn icon-btn--sm" type="button" data-toast="Soporte: soporte@aris.app" aria-label="Contactar con soporte">
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </button>
+        </div>
+
+        <button class="btn btn--ghost btn--full btn--danger-text profile__logout" type="button" data-logout>
+          <svg class="icon" aria-hidden="true"><use href="#i-logout"/></svg>
+          Cerrar sesión
+        </button>
+
+        <p class="profile__version">ARIS v2.0 · PWA con soporte offline</p>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         Tabbar única compartida
+         ========================================================== -->
+    <nav class="tabbar" data-tabbar hidden aria-label="Navegación principal">
+      <a class="tab" href="#/inicio" data-go="#/inicio">
+        <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span>Inicio</span>
+      </a>
+      <a class="tab" href="#/alertas" data-go="#/alertas">
+        <svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg><span>Alertas</span>
+      </a>
+      <a class="tab tab--sos" href="#/sismo" data-go="#/sismo" aria-label="Emergencia SOS">
+        <span class="tab__sos-circle"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+        <span>SOS</span>
+      </a>
+      <a class="tab" href="#/rcp" data-go="#/rcp">
+        <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg><span>Guía</span>
+      </a>
+      <a class="tab" href="#/perfil" data-go="#/perfil">
+        <svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><span>Perfil</span>
+      </a>
+    </nav>
+
+    <!-- Banner de instalación de la PWA -->
+    <div id="install-banner" hidden role="region" aria-label="Instalar ARIS">
+      <span class="install-banner__icon" aria-hidden="true">
+        <svg class="icon"><use href="#i-heart-pulse"/></svg>
+      </span>
+      <span class="install-banner__body">
+        <strong>Instalá ARIS</strong>
+        <span>Acceso directo y uso sin conexión.</span>
+      </span>
+      <button class="btn btn--primary btn--sm install-banner__install" type="button">Instalar</button>
+      <button class="icon-btn install-banner__close" type="button" aria-label="Descartar">
+        <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+      </button>
+    </div>
+
+    <!-- Avisos -->
+    <div id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="pwa.js"></script>
+</body>
+</html>

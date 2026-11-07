@@ -1,0 +1,45 @@
+{
+  "id": "aris-app",
+  "name": "ARIS — Tu aliado en emergencias",
+  "short_name": "ARIS",
+  "description": "Asistencia por voz, alertas de emergencia y guías de primeros auxilios en una sola aplicación.",
+  "lang": "es",
+  "dir": "ltr",
+  "start_url": "app.html?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#0A192F",
+  "theme_color": "#0A192F",
+  "categories": ["health", "medical", "utilities"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Emergencias SOS",
+      "short_name": "SOS",
+      "description": "Abrir directamente la pantalla de emergencias",
+      "url": "app.html#/sismo",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Guía de RCP",
+      "short_name": "RCP",
+      "description": "Guía paso a paso de reanimación",
+      "url": "app.html#/rcp",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Alertas",
+      "short_name": "Alertas",
+      "description": "Centro de avisos de tu zona",
+      "url": "app.html#/alertas",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

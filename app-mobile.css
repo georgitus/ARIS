@@ -1,0 +1,263 @@
+/* ============================================================
+   ARIS · PWA — adaptación del showcase a app real
+   Se carga después de styles.css. Convierte las pantallas del
+   mockup (390 × 844 dentro de un marco) en vistas nativas a
+   pantalla completa, con soporte de safe-areas.
+   ============================================================ */
+
+/* ---------- 1. Lienzo de la app ---------- */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body.aris-app {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #04090F;
+  overscroll-behavior: none;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 480px;
+  overflow: hidden;
+  background: var(--navy-900, #0A192F);
+}
+
+/* En pantallas grandes, la app se presenta como un teléfono
+   centrado, tal como la definen las medidas del mockup. */
+@media (min-width: 700px) and (min-height: 760px) {
+  #app {
+    width: 390px;
+    height: 844px;
+    border-radius: 46px;
+    box-shadow:
+      0 60px 120px -40px rgba(0, 0, 0, .95),
+      0 0 0 1px rgba(148, 178, 214, .14),
+      0 0 0 10px rgba(9, 18, 32, .85);
+  }
+}
+
+/* ---------- 2. Pantallas: una sola a la vez ---------- */
+.screen {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  max-height: none;
+  transform: none;
+  display: none;
+}
+
+.screen.is-current {
+  display: flex;
+  animation: aris-view-in .32s cubic-bezier(.2, .7, .3, 1) both;
+}
+
+@keyframes aris-view-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen.is-current,
+  #install-banner,
+  #toast {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- 3. Safe areas (notch y barra del sistema) ---------- */
+.appbar {
+  padding-top: max(4px, env(safe-area-inset-top));
+}
+
+.screen__scroll,
+.auth__scroll {
+  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+}
+
+/* Pantallas sin tabbar mantienen su colchón natural. */
+.screen--quake .screen__scroll,
+.screen--voice .screen__scroll,
+.screen--cpr .screen__scroll {
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+}
+
+.screen--splash .splash__bottom {
+  padding-bottom: calc(0px + env(safe-area-inset-bottom));
+}
+
+.tabbar {
+  padding-bottom: max(0px, env(safe-area-inset-bottom));
+}
+
+.action-bar {
+  padding-bottom: max(14px, env(safe-area-inset-bottom));
+}
+
+.quake__scroll {
+  padding-bottom: 132px;
+}
+
+.voice__scroll {
+  padding-bottom: 12px;
+}
+
+/* Acceso a la voz desde la pantalla de sismo */
+.quake-voice-cta {
+  margin-top: 16px;
+}
+
+.quake__scroll .quake-note {
+  margin-top: 12px;
+}
+
+/* CTA compacta del banner de instalación */
+.btn--sm {
+  padding: 9px 14px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+/* El atributo hidden gana aunque el elemento tenga display en CSS */
+[hidden] {
+  display: none !important;
+}
+
+/* El sistema ya dibuja su propia barra de gestos */
+.home-indicator {
+  display: none;
+}
+
+/* En escritorio no hay notch: colchones estándar. */
+@media (min-width: 700px) {
+  .appbar {
+    padding-top: 6px;
+  }
+  .screen__scroll,
+  .auth__scroll {
+    padding-top: 18px;
+  }
+}
+
+/* ---------- 4. Tabbar única compartida ---------- */
+.tabbar[hidden] {
+  display: none;
+}
+
+/* ---------- 5. Plataformas de instalado ---------- */
+#install-banner {
+  position: absolute;
+  top: max(10px, env(safe-area-inset-top));
+  left: 14px;
+  right: 14px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(56, 189, 248, .28);
+  border-radius: 18px;
+  background: linear-gradient(165deg, rgba(19, 48, 78, .96), rgba(10, 26, 46, .98));
+  box-shadow: 0 22px 48px -22px rgba(0, 0, 0, .85);
+  color: var(--text);
+  animation: aris-view-in .4s cubic-bezier(.2, .7, .3, 1) both;
+}
+
+#install-banner[hidden] {
+  display: none;
+}
+
+#install-banner .install-banner__icon {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(145deg, var(--cyan-bright), var(--cyan-deep));
+  color: #04121F;
+}
+
+#install-banner .install-banner__body {
+  flex: 1;
+  min-width: 0;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+#install-banner .install-banner__body strong {
+  display: block;
+  font-size: 13px;
+}
+
+#install-banner .install-banner__body span {
+  color: var(--muted-2);
+}
+
+#install-banner .install-banner__install {
+  flex: none;
+}
+
+#install-banner .install-banner__close {
+  flex: none;
+}
+
+/* ---------- 6. Toast de avisos ---------- */
+#toast {
+  position: absolute;
+  bottom: calc(92px + env(safe-area-inset-bottom));
+  left: 50%;
+  z-index: 70;
+  max-width: 320px;
+  padding: 11px 18px;
+  border: 1px solid rgba(148, 178, 214, .18);
+  border-radius: 99px;
+  background: rgba(13, 31, 54, .96);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .9);
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, 12px);
+  transition: opacity .28s ease, transform .28s cubic-bezier(.2, .7, .3, 1);
+  pointer-events: none;
+}
+
+#toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- 7. Detalles de la app ---------- */
+body.aris-app ::selection {
+  background: rgba(56, 189, 248, .28);
+}
+
+/* El splash del mockup anima la ECG; sigue igual en la app. */
+.screen--splash .splash__actions .btn {
+  cursor: pointer;
+}
+
+/* Evitar el típico flash blanco en navegadores claros. */
+body.aris-app {
+  color-scheme: dark;
+}
