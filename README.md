@@ -39,11 +39,12 @@ manifest.json     # Manifest de la PWA
 icons/            # Iconos de la app (any + maskable)
 app.js            # Interacciones de la app (guía, voz, filtros)
 styles.css        # Estilos de las pantallas
-landing.html      # Landing promocional de la aplicación
+landing.html      # Landing minimalista (hero visual + CTA de instalación)
+landing.css       # Estilos del hero y modal de instalación
+landing.js        # Lógica de instalación PWA (beforeinstallprompt + modal)
 audio/            # Respuestas de voz del asistente (MP3)
 ```
 
 ## Notas
 
 - Los datos, alertas y contactos mostrados son ficticios (prototipo de producto).
-- `landing.html` enlaza `landing.css` / `landing.js`, que aún no están en el repo.

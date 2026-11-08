@@ -2,23 +2,28 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#06101F">
-  <meta name="description" content="ARIS reúne asistencia por voz, alertas de emergencia y guías de primeros auxilios en una sola app. Conocé el prototipo.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A192F">
+  <meta name="description" content="ARIS — Asistencia rápida por voz, alertas de emergencia y guías de primeros auxilios en una sola aplicación móvil.">
   <meta property="og:title" content="ARIS — Tu aliado en emergencias">
-  <meta property="og:description" content="Asistencia por voz, alertas de tu zona y guías de primeros auxilios en una sola app.">
+  <meta property="og:description" content="Asistencia por voz, alertas sísmicas y guías de RCP en una sola app instalable.">
   <meta property="og:type" content="website">
   <title>ARIS — Tu aliado en emergencias</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="landing.css">
-  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <!-- Iconos -->
+  <!-- ============================================================
+       Sprite de Iconos SVG
+       ============================================================ -->
   <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <symbol id="i-heart-pulse" viewBox="0 0 24 24">
       <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
@@ -28,357 +33,226 @@
       <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>
       <path d="M12 9v4"/><path d="M12 17h.01"/>
     </symbol>
-    <symbol id="i-megaphone" viewBox="0 0 24 24">
-      <path d="m3 11 18-5v12L3 13v-2Z"/>
-      <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
-    </symbol>
-    <symbol id="i-book" viewBox="0 0 24 24">
-      <path d="M12 7v14"/>
-      <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/>
-    </symbol>
-    <symbol id="i-home" viewBox="0 0 24 24">
-      <path d="m3 10.5 9-7.5 9 7.5"/>
-      <path d="M5 9.5V21h14V9.5"/>
-      <path d="M9 21v-6h6v6"/>
-    </symbol>
-    <symbol id="i-bell" viewBox="0 0 24 24">
-      <path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-      <path d="M10.3 21a2 2 0 0 0 3.4 0"/>
-    </symbol>
-    <symbol id="i-user" viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="4"/>
-      <path d="M4 21a8 8 0 0 1 16 0"/>
-    </symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24">
-      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c1 .3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/>
-    </symbol>
     <symbol id="i-mic" viewBox="0 0 24 24">
       <rect x="9" y="2" width="6" height="11" rx="3"/>
       <path d="M5 10a7 7 0 0 0 14 0"/>
       <path d="M12 19v3"/>
     </symbol>
+    <symbol id="i-book" viewBox="0 0 24 24">
+      <path d="M12 7v14"/>
+      <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/>
+    </symbol>
+    <symbol id="i-download" viewBox="0 0 24 24">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </symbol>
     <symbol id="i-arrow-right" viewBox="0 0 24 24">
       <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
     </symbol>
-    <symbol id="i-lock" viewBox="0 0 24 24">
-      <rect x="4" y="10" width="16" height="11" rx="2.5"/>
-      <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <rect x="5" y="2" width="14" height="20" rx="3"/>
+      <line x1="12" y1="18" x2="12.01" y2="18"/>
     </symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24">
+    <symbol id="i-shield-check" viewBox="0 0 24 24">
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
       <path d="m9 12 2 2 4-4"/>
     </symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24">
-      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-      <circle cx="12" cy="10" r="3"/>
+    <symbol id="i-wifi-off" viewBox="0 0 24 24">
+      <line x1="1" y1="1" x2="23" y2="23"/>
+      <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+      <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+      <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
+      <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+      <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+      <line x1="12" y1="20" x2="12.01" y2="20"/>
     </symbol>
-    <symbol id="i-users" viewBox="0 0 24 24">
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-      <circle cx="9" cy="7" r="4"/>
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    <symbol id="i-share" viewBox="0 0 24 24">
+      <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+      <polyline points="16 6 12 2 8 6"/>
+      <line x1="12" y1="2" x2="12" y2="15"/>
     </symbol>
-    <symbol id="i-check" viewBox="0 0 24 24">
-      <path d="m5 13 4 4L19 7"/>
-    </symbol>
-    <symbol id="i-menu" viewBox="0 0 24 24">
-      <path d="M4 7h16M4 12h16M4 17h16"/>
+    <symbol id="i-plus-square" viewBox="0 0 24 24">
+      <rect width="18" height="18" x="3" y="3" rx="2"/>
+      <path d="M12 8v8"/><path d="M8 12h8"/>
     </symbol>
     <symbol id="i-close" viewBox="0 0 24 24">
-      <path d="m6 6 12 12M18 6 6 18"/>
-    </symbol>
-    <symbol id="i-wifi" viewBox="0 0 16 12">
-      <path d="M1 4.2a10.5 10.5 0 0 1 14 0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M3.6 6.8a6.6 6.6 0 0 1 8.8 0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M6.2 9.3a2.7 2.7 0 0 1 3.6 0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      <circle cx="8" cy="11" r=".8" fill="currentColor"/>
-    </symbol>
-    <symbol id="i-signal" viewBox="0 0 18 12">
-      <rect x="1" y="8" width="3" height="4" rx="1" fill="currentColor"/>
-      <rect x="5.5" y="5.5" width="3" height="6.5" rx="1" fill="currentColor"/>
-      <rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"/>
-      <rect x="14.5" y=".5" width="3" height="11.5" rx="1" fill="currentColor"/>
-    </symbol>
-    <symbol id="i-battery" viewBox="0 0 26 12">
-      <rect x=".7" y="1.2" width="21" height="9.6" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45"/>
-      <rect x="2.6" y="3.1" width="14.5" height="5.8" rx="1.4" fill="currentColor"/>
-      <path d="M23.4 4.2v3.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>
+      <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
     </symbol>
   </svg>
 
-  <header class="site-header">
-    <div class="container header__inner">
-      <a class="brand" href="landing.html" aria-label="ARIS, inicio">
-        <span class="brand__mark" aria-hidden="true">
-          <svg class="icon"><use href="#i-heart-pulse"/></svg>
-        </span>
-        <span class="brand__word">ARIS</span>
-      </a>
+  <div class="landing-page">
 
-      <nav class="nav" aria-label="Navegación principal">
-        <a href="#beneficios">Beneficios</a>
-        <a href="#como-funciona">Cómo funciona</a>
-        <a href="index.html#inicio">Prototipo</a>
-      </nav>
+    <!-- Encabezado sutil -->
+    <header class="header">
+      <div class="header__inner">
+        <div class="brand">
+          <span class="brand__icon" aria-hidden="true">
+            <svg class="icon"><use href="#i-heart-pulse"/></svg>
+          </span>
+          <span class="brand__name">ARIS</span>
+        </div>
+        <span class="badge badge--pill">PWA · Asistencia Médica</span>
+      </div>
+    </header>
 
-      <a class="btn btn--primary btn--sm header__cta" href="index.html#inicio">
-        Probar el prototipo
-        <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
-      </a>
-
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
-        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
-      </button>
-    </div>
-
-    <nav class="mobile-menu" id="mobile-menu" aria-label="Navegación móvil">
-      <a href="#beneficios">Beneficios</a>
-      <a href="#como-funciona">Cómo funciona</a>
-      <a href="index.html#inicio">Prototipo</a>
-      <a class="btn btn--primary" href="index.html#inicio">
-        Probar el prototipo
-        <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
-      </a>
-    </nav>
-  </header>
-
-  <main id="contenido">
-    <!-- Hero -->
-    <section class="hero" aria-labelledby="hero-title">
+    <!-- Hero Principal -->
+    <main class="hero">
       <div class="hero__bg" aria-hidden="true">
-        <span class="hero__halo"></span>
-        <span class="hero__ring"></span>
+        <div class="hero__glow hero__glow--cyan"></div>
+        <div class="hero__glow hero__glow--blue"></div>
       </div>
 
-      <div class="container hero__inner">
-        <div class="hero__copy reveal">
-          <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span> Salud y emergencias</p>
-          <h1 id="hero-title">Tu aliado en <span class="grad">emergencias.</span></h1>
-          <p class="hero__lead">
-            Asistencia por voz, alertas de tu zona y guías de primeros auxilios en una sola app.
-            Información clara para actuar rápido cuando cada segundo cuenta.
-          </p>
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="index.html#inicio">
-              Probar el prototipo
-              <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
-            </a>
-            <a class="btn btn--ghost" href="#beneficios">Ver beneficios</a>
+      <div class="hero__container">
+        <!-- Columna Izquierda: Información & Acciones -->
+        <div class="hero__content">
+          <div class="eyebrow">
+            <span class="eyebrow__pulse" aria-hidden="true"></span>
+            <span>Salud y emergencias en tiempo real</span>
           </div>
-          <p class="hero__note">
-            <svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>
-            Prototipo funcional · Sin registro
+
+          <h1 class="hero__title">
+            Tu aliado en <span class="text-gradient">emergencias.</span>
+          </h1>
+
+          <p class="hero__description">
+            Asistencia médica guiada por voz, alertas sísmicas y de tu zona al instante, y pasos interactivos de RCP. Todo accesible al segundo, incluso sin conexión a internet.
           </p>
-          <ul class="hero__meta" aria-label="Datos de ARIS">
-            <li><strong>8</strong><span>Pantallas</span></li>
-            <li><strong>RCP</strong><span>Paso a paso</span></li>
-            <li><strong>24/7</strong><span>Alertas</span></li>
+
+          <!-- CTAs -->
+          <div class="hero__cta-group">
+            <a href="app.html" class="btn btn--primary btn--lg">
+              <span>Abrir Aplicación</span>
+              <svg class="icon"><use href="#i-arrow-right"/></svg>
+            </a>
+
+            <button type="button" class="btn btn--outline btn--lg" id="btn-install">
+              <svg class="icon"><use href="#i-download"/></svg>
+              <span>Instalar en el móvil</span>
+            </button>
+          </div>
+
+          <!-- Beneficios clave rápidos -->
+          <ul class="hero__highlights">
+            <li>
+              <svg class="icon"><use href="#i-shield-check"/></svg>
+              <span>Sin descargas pesadas</span>
+            </li>
+            <li>
+              <svg class="icon"><use href="#i-wifi-off"/></svg>
+              <span>Soporte 100% offline</span>
+            </li>
+            <li>
+              <svg class="icon"><use href="#i-phone"/></svg>
+              <span>Instalable en iOS & Android</span>
+            </li>
           </ul>
         </div>
 
-        <div class="hero__visual reveal">
-          <div class="device" aria-hidden="true">
-            <div class="device__frame">
-              <div class="device__screen">
-                <div class="mini-status">
-                  <span>9:41</span>
-                  <span class="mini-status__icons">
-                    <svg class="mini-icon"><use href="#i-signal"/></svg>
-                    <svg class="mini-icon"><use href="#i-wifi"/></svg>
-                    <svg class="mini-icon"><use href="#i-battery"/></svg>
-                  </span>
+        <!-- Columna Derecha: Hero Image (Mockup interactivo del móvil) -->
+        <div class="hero__visual">
+          <div class="mockup-wrapper">
+            <div class="device-frame">
+              <!-- Notch y barra de estado -->
+              <div class="device-notch"></div>
+              <div class="device-screen">
+                <div class="screen-header">
+                  <div>
+                    <span class="screen-greeting">Hola, Martina</span>
+                    <strong class="screen-status">¿Necesitás ayuda hoy?</strong>
+                  </div>
+                  <div class="screen-avatar">MG</div>
                 </div>
 
-                <div class="mini-app">
-                  <div class="mini-top">
-                    <div>
-                      <p class="mini-hello">Hola, Martina</p>
-                      <p class="mini-sub">¿Cómo te sentís hoy?</p>
-                    </div>
-                    <span class="mini-avatar">MG</span>
+                <!-- Botón SOS Central -->
+                <div class="screen-sos">
+                  <div class="sos-glow"></div>
+                  <div class="sos-btn">
+                    <span>SOS</span>
                   </div>
+                  <span class="sos-label">Mantener presionado para alertar</span>
+                </div>
 
-                  <div class="mini-sos">
-                    <div class="mini-sos__copy">
-                      <span class="mini-sos__label"><span class="mini-dot"></span> Emergencia</span>
-                      <strong>Pedí ayuda ahora</strong>
-                      <span>Mantené presionado el botón</span>
-                    </div>
-                    <span class="mini-sos__btn">SOS</span>
+                <!-- Tarjetas rápidas -->
+                <div class="screen-cards">
+                  <div class="screen-card screen-card--cpr">
+                    <svg class="icon"><use href="#i-heart-pulse"/></svg>
+                    <strong>Guía RCP</strong>
+                    <span>100-120 bpm</span>
                   </div>
-
-                  <div class="mini-grid">
-                    <div class="mini-card">
-                      <span class="mini-card__icon mini-card__icon--cyan"><svg class="icon"><use href="#i-heart-pulse"/></svg></span>
-                      <strong>Mi salud</strong>
-                      <span>Signos vitales</span>
-                    </div>
-                    <div class="mini-card">
-                      <span class="mini-card__icon mini-card__icon--amber"><svg class="icon"><use href="#i-megaphone"/></svg></span>
-                      <strong>Alertas</strong>
-                      <span>2 nuevas</span>
-                    </div>
-                    <div class="mini-card">
-                      <span class="mini-card__icon mini-card__icon--blue"><svg class="icon"><use href="#i-book"/></svg></span>
-                      <strong>Guía RCP</strong>
-                      <span>Paso a paso</span>
-                    </div>
-                    <div class="mini-card">
-                      <span class="mini-card__icon mini-card__icon--violet"><svg class="icon"><use href="#i-users"/></svg></span>
-                      <strong>Contactos</strong>
-                      <span>3 de confianza</span>
-                    </div>
-                  </div>
-
-                  <div class="mini-alert">
-                    <span class="mini-alert__icon"><svg class="icon"><use href="#i-alert"/></svg></span>
-                    <div>
-                      <strong>Alerta sísmica</strong>
-                      <span>Magnitud 6.4 · Zona Norte</span>
-                    </div>
-                    <span class="mini-alert__time">3 min</span>
+                  <div class="screen-card screen-card--voice">
+                    <svg class="icon"><use href="#i-mic"/></svg>
+                    <strong>Modo Voz</strong>
+                    <span>Manos libres</span>
                   </div>
                 </div>
 
-                <div class="mini-nav">
-                  <span class="is-active"><svg class="icon"><use href="#i-home"/></svg><span>Inicio</span></span>
-                  <span><svg class="icon"><use href="#i-bell"/></svg><span>Alertas</span></span>
-                  <span><svg class="icon"><use href="#i-book"/></svg><span>Guía</span></span>
-                  <span><svg class="icon"><use href="#i-user"/></svg><span>Perfil</span></span>
+                <!-- Alerta activa en el mock -->
+                <div class="screen-alert">
+                  <svg class="icon"><use href="#i-alert"/></svg>
+                  <div>
+                    <strong>Alerta Sísmica</strong>
+                    <span>Zona Norte · M 6.4</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="float-card float-card--alert" aria-hidden="true">
-            <span class="float-card__icon float-card__icon--danger"><svg class="icon"><use href="#i-alert"/></svg></span>
-            <div>
-              <strong>Alerta sísmica</strong>
-              <span>Magnitud 6.4 · Zona Norte</span>
+            <!-- Chips flotantes de soporte visual -->
+            <div class="floating-chip floating-chip--voice">
+              <div class="voice-dot"></div>
+              <svg class="icon"><use href="#i-mic"/></svg>
+              <span>«ARIS, ¿cómo hago RCP?»</span>
             </div>
-          </div>
 
-          <div class="voice-chip" aria-hidden="true">
-            <span class="voice-chip__dot"></span>
-            <svg class="icon"><use href="#i-mic"/></svg>
-            <span>Escuchando…</span>
-            <span class="voice-chip__wave"><i></i><i></i><i></i><i></i></span>
-          </div>
-
-          <div class="float-card float-card--cpr" aria-hidden="true">
-            <span class="float-card__icon float-card__icon--cyan"><svg class="icon"><use href="#i-heart-pulse"/></svg></span>
-            <div>
-              <strong>RCP en adultos</strong>
-              <span>30 compresiones · 2 ventilaciones</span>
+            <div class="floating-chip floating-chip--badge">
+              <svg class="icon"><use href="#i-shield-check"/></svg>
+              <span>Ficha médica lista</span>
             </div>
-            <span class="float-card__check"><svg class="icon"><use href="#i-check"/></svg></span>
           </div>
         </div>
       </div>
-    </section>
+    </main>
 
-    <!-- Beneficios -->
-    <section class="section features" id="beneficios" aria-labelledby="beneficios-title">
-      <div class="container">
-        <div class="section__head reveal">
-          <p class="eyebrow">Todo en un solo lugar</p>
-          <h2 id="beneficios-title">Herramientas claras para momentos críticos.</h2>
-          <p>Cada pantalla está pensada para reducir la fricción y darte una acción concreta.</p>
+    <!-- Footer minimalista -->
+    <footer class="footer">
+      <p>© 2026 ARIS · Aplicación web progresiva de salud y emergencias.</p>
+    </footer>
+
+  </div>
+
+  <!-- Modal de instrucciones de instalación -->
+  <div class="install-modal" id="install-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="install-modal__backdrop" id="modal-backdrop"></div>
+    <div class="install-modal__card">
+      <button type="button" class="install-modal__close" id="modal-close" aria-label="Cerrar modal">
+        <svg class="icon"><use href="#i-close"/></svg>
+      </button>
+
+      <div class="install-modal__icon">
+        <svg class="icon"><use href="#i-heart-pulse"/></svg>
+      </div>
+
+      <h2 id="modal-title" class="install-modal__title">Instalar ARIS en tu móvil</h2>
+      <p class="install-modal__desc">Tené ARIS a mano en tu pantalla de inicio para emergencias inmediatas.</p>
+
+      <div class="install-tabs">
+        <div class="install-step">
+          <span class="step-num">iPhone (Safari)</span>
+          <p>1. Tocá el botón <strong>Compartir</strong> (<svg class="icon inline-icon"><use href="#i-share"/></svg>) en la barra inferior.</p>
+          <p>2. Seleccioná <strong>«Agregar a inicio»</strong> (<svg class="icon inline-icon"><use href="#i-plus-square"/></svg>).</p>
         </div>
 
-        <div class="feature-grid">
-          <article class="feature-card reveal">
-            <span class="feature-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg></span>
-            <h3>Asistencia por voz</h3>
-            <p>Hablá con ARIS y recibí indicaciones paso a paso, incluso si tenés las manos ocupadas.</p>
-          </article>
-          <article class="feature-card reveal">
-            <span class="feature-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-heart-pulse"/></svg></span>
-            <h3>Guía de RCP</h3>
-            <p>Compresiones, ritmo y ventilaciones explicados de forma simple, con video y pasos claros.</p>
-          </article>
-          <article class="feature-card reveal">
-            <span class="feature-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-megaphone"/></svg></span>
-            <h3>Alertas de tu zona</h3>
-            <p>Sismos, salud y clima con prioridad visual para que sepas qué hacer primero.</p>
-          </article>
+        <div class="install-step">
+          <span class="step-num">Android (Chrome)</span>
+          <p>1. Tocá los tres puntos <strong>(⋮)</strong> de la esquina superior.</p>
+          <p>2. Seleccioná <strong>«Instalar aplicación»</strong> o <strong>«Agregar a la pantalla principal»</strong>.</p>
         </div>
       </div>
-    </section>
 
-    <!-- Cómo funciona -->
-    <section class="steps" id="como-funciona" aria-labelledby="pasos-title">
-      <div class="container steps__inner">
-        <div class="steps__copy reveal">
-          <p class="eyebrow">Cómo funciona</p>
-          <h2 id="pasos-title">De la alerta a la acción, sin vueltas.</h2>
-          <p>Un flujo simple para que no tengas que pensar de más cuando el tiempo apremia.</p>
-          <a class="text-link" href="index.html#inicio">
-            Ver el prototipo completo
-            <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
-          </a>
-        </div>
-
-        <ol class="steps__list">
-          <li class="reveal">
-            <span class="steps__num" aria-hidden="true">01</span>
-            <div>
-              <h3>Contá qué pasa</h3>
-              <p>Escribí o hablá. ARIS interpreta la situación y prioriza la ayuda.</p>
-            </div>
-          </li>
-          <li class="reveal">
-            <span class="steps__num" aria-hidden="true">02</span>
-            <div>
-              <h3>Seguí la guía</h3>
-              <p>Recibí pasos concretos, con voz y texto, adaptados a la emergencia.</p>
-            </div>
-          </li>
-          <li class="reveal">
-            <span class="steps__num" aria-hidden="true">03</span>
-            <div>
-              <h3>Avisá a tu red</h3>
-              <p>Enviá tu ubicación y el tipo de emergencia a tus contactos de confianza.</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- CTA final -->
-    <section class="cta" aria-labelledby="cta-title">
-      <div class="container">
-        <div class="cta__panel reveal">
-          <div class="cta__copy">
-            <p class="eyebrow">Empezá hoy</p>
-            <h2 id="cta-title">La ayuda correcta, en el momento justo.</h2>
-            <p>Explorá el prototipo interactivo de ARIS y conocé las ocho pantallas de la app.</p>
-          </div>
-          <a class="btn btn--primary btn--lg" href="index.html#inicio">
-            Probar el prototipo
-            <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer__inner">
-      <a class="brand brand--footer" href="landing.html" aria-label="ARIS, inicio">
-        <span class="brand__mark" aria-hidden="true">
-          <svg class="icon"><use href="#i-heart-pulse"/></svg>
-        </span>
-        <span class="brand__word">ARIS</span>
-      </a>
-      <p>Prototipo de interfaz · HTML, CSS y JavaScript. Los datos mostrados son ficticios.</p>
-      <nav class="footer__nav" aria-label="Enlaces del pie">
-        <a href="#beneficios">Beneficios</a>
-        <a href="#como-funciona">Cómo funciona</a>
-        <a href="index.html#inicio">Prototipo</a>
-      </nav>
+      <a href="app.html" class="btn btn--primary btn--full">Continuar a la aplicación</a>
     </div>
-  </footer>
+  </div>
 
   <script src="landing.js"></script>
 </body>
